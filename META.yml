@@ -9,4 +9,4 @@ requires:
   DBIx::Class: 0.08100
 resources: 
   repository: http://github.com/fayland/dbix-class-resultset-void/tree
-version: 0.01
+version: 0.02
