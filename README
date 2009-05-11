@@ -3,7 +3,7 @@ NAME
     context
 
 VERSION
-    version 0.03
+    version 0.04
 
 SYNOPSIS
         my $rs = $schema->resultset('CD');
@@ -29,8 +29,8 @@ SYNOPSIS
 DESCRIPTION
     The API is the same as DBIx::Class::ResultSet.
 
-    use "search($query, { rows =" 1, select => [1] })-&gt;single;> instead
-    of "find" unless defined wantarray.
+    use "search($query, { rows =&gt; 1, select =&gt; [1] })-&gt;single;"
+    instead of "find" unless defined wantarray.
 
     (Thank ribasushi to tell me "count" is bad)
 

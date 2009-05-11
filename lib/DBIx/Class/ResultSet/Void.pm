@@ -1,5 +1,5 @@
 package DBIx::Class::ResultSet::Void;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # ABSTRACT: improve DBIx::Class::ResultSet with void context
 
@@ -133,7 +133,7 @@ DBIx::Class::ResultSet::Void - improve DBIx::Class::ResultSet with void context
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -161,7 +161,7 @@ Or in ResultSet/CD.pm
 
 The API is the same as L<DBIx::Class::ResultSet>.
 
-use C<search($query, { rows => 1, select => [1] })-&gt;single;> instead of C<find> unless defined wantarray.
+use C<search($query, { rows =&gt; 1, select =&gt; [1] })-&gt;single;> instead of C<find> unless defined wantarray.
 
 (Thank ribasushi to tell me C<count> is bad)
 
