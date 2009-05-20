@@ -3,7 +3,7 @@ NAME
     context
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
         my $rs = $schema->resultset('CD');
@@ -29,12 +29,21 @@ SYNOPSIS
 DESCRIPTION
     The API is the same as DBIx::Class::ResultSet.
 
-    use "search($query, { rows =&gt; 1, select =&gt; [1] })-&gt;single;"
-    instead of "find" unless defined wantarray.
+    use "exists" instead of "find" unless defined wantarray.
 
     (Thank ribasushi to tell me "count" is bad)
 
   METHODS
+    *   exists
+
+            $rs->exists( { id => 1 } );
+
+        It works like:
+
+            $rs->search( { id => 1 }, { rows => 1, select => [1] } )->single;
+
+        It is a little faster than "count" if you don't care the real count.
+
     *   find_or_create
 
         "find_or_create" in DBIx::Class::ResultSet:

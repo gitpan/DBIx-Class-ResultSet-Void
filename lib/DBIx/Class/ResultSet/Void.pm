@@ -1,5 +1,5 @@
 package DBIx::Class::ResultSet::Void;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: improve DBIx::Class::ResultSet with void context
 
@@ -8,6 +8,12 @@ use warnings;
 use Carp::Clan qw/^DBIx::Class/;
 
 use base qw(DBIx::Class::ResultSet);
+
+sub exists {
+    my ( $self, $query ) = @_;
+
+    return $self->search( $query, { rows => 1, select => [1] } )->single;
+}
 
 sub find_or_create {
     my $self = shift;
@@ -18,7 +24,7 @@ sub find_or_create {
     my $hash = ref $_[0] eq 'HASH' ? shift : {@_};
 
     my $query = $self->___get_primary_or_unique_key( $hash, $attrs );
-    my $exists = $self->search( $query, { rows => 1, select => [1] } )->single;
+    my $exists = $self->exists($query);
     $self->create($hash) unless $exists;
 }
 
@@ -31,7 +37,7 @@ sub update_or_create {
     my $cond = ref $_[0] eq 'HASH' ? shift : {@_};
 
     my $query = $self->___get_primary_or_unique_key( $cond, $attrs );
-    my $exists = $self->search( $query, { rows => 1, select => [1] } )->single;
+    my $exists = $self->exists($query);
 
     if ($exists) {
 
@@ -133,7 +139,7 @@ DBIx::Class::ResultSet::Void - improve DBIx::Class::ResultSet with void context
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -161,13 +167,23 @@ Or in ResultSet/CD.pm
 
 The API is the same as L<DBIx::Class::ResultSet>.
 
-use C<search($query, { rows =&gt; 1, select =&gt; [1] })-&gt;single;> instead of C<find> unless defined wantarray.
+use C<exists> instead of C<find> unless defined wantarray.
 
 (Thank ribasushi to tell me C<count> is bad)
 
 =head2 METHODS
 
 =over 4
+
+=item * exists
+
+    $rs->exists( { id => 1 } );
+
+It works like:
+
+    $rs->search( { id => 1 }, { rows => 1, select => [1] } )->single;
+
+It is a little faster than C<count> if you don't care the real count.
 
 =item * find_or_create
 
