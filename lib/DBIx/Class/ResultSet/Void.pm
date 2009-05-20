@@ -1,5 +1,5 @@
 package DBIx::Class::ResultSet::Void;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # ABSTRACT: improve DBIx::Class::ResultSet with void context
 
@@ -139,7 +139,7 @@ DBIx::Class::ResultSet::Void - improve DBIx::Class::ResultSet with void context
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
